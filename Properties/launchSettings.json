@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "spdd": {
+      "commandName": "Project",
+      "workingDirectory": "Assets"
+    }
+  }
+}
