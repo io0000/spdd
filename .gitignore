@@ -4,3 +4,6 @@
 
 # Visual Studio temp something
 .vs/
+
+# imgui stuff
+/Assets/imgui.ini

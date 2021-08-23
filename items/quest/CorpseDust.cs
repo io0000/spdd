@@ -1,15 +1,16 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using watabou.utils;
+using System.Linq;
 using watabou.noosa.audio;
-using spdd.sprites;
+using watabou.utils;
 using spdd.actors;
-using spdd.actors.hero;
 using spdd.actors.buffs;
+using spdd.actors.hero;
 using spdd.actors.mobs;
-using spdd.utils;
+using spdd.items.bags;
 using spdd.messages;
+using spdd.sprites;
+using spdd.utils;
 
 namespace spdd.items.quest
 {
@@ -40,14 +41,27 @@ namespace spdd.items.quest
             return true;
         }
 
-        public override bool DoPickUp(Hero hero)
+        // [버그]앙크부활 이후 시체먼지가 정상적으로 작동하지 않음
+        //public override bool DoPickUp(Hero hero)
+        //{
+        //    if (base.DoPickUp(hero))
+        //    {
+        //        GLog.Negative(Messages.Get(this, "chill"));
+        //        Buff.Affect<DustGhostSpawner>(hero);
+        //        return true;
+        //    }
+        //    return false;
+        //}
+
+        public override bool Collect(Bag container)
         {
-            if (base.DoPickUp(hero))
+            if (base.Collect(container))
             {
                 GLog.Negative(Messages.Get(this, "chill"));
-                Buff.Affect<DustGhostSpawner>(hero);
+                Buff.Affect<DustGhostSpawner>(Dungeon.hero);
                 return true;
             }
+
             return false;
         }
 
@@ -90,8 +104,8 @@ namespace spdd.items.quest
                         --tries;
                     }
                     while (tries > 0 &&
-                        (!Dungeon.level.heroFOV[pos] || 
-                        Dungeon.level.solid[pos] || 
+                        (!Dungeon.level.heroFOV[pos] ||
+                        Dungeon.level.solid[pos] ||
                         Actor.FindChar(pos) != null));
 
                     if (tries > 0)
