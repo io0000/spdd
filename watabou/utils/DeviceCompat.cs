@@ -45,7 +45,12 @@ namespace watabou.utils
 
         public static bool IsDebug()
         {
-            return Game.version.Contains("INDEV");
+            //return Game.version.Contains("INDEV");
+#if DEBUG
+            return true;
+#else
+            return false;
+#endif
         }
 
         public static void OpenURI(string URI)

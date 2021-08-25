@@ -261,8 +261,11 @@ namespace spdd
 
             // TODO01 하드코딩 제거
             Game.versionCode = 464;
+#if DEBUG
             Game.version = "0.8.2d-INDEV";
-
+#else
+            Game.version = "0.8.2d";
+#endif
             Point p = SPDSettings.WindowResolution();
 
             GameWindowSettings gameWindowSettings = GameWindowSettings.Default;
