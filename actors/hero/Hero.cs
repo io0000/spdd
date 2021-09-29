@@ -522,7 +522,6 @@ namespace spdd.actors.hero
                 resting = false;
 
                 ready = false;
-                Console.WriteLine("Act() ready = false");
 
                 if (curAction is HeroAction.Move)
                     actResult = ActMove((HeroAction.Move)curAction);
@@ -559,7 +558,6 @@ namespace spdd.actors.hero
         public void Busy()
         {
             ready = false;
-            Console.WriteLine("Busy() ready = false");
         }
 
         private void Ready()
@@ -570,7 +568,6 @@ namespace spdd.actors.hero
             curAction = null;
             damageInterrupt = true;
             ready = true;
-            Console.WriteLine("Ready() ready = true");
 
             AttackIndicator.UpdateState();
 
