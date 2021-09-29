@@ -3,7 +3,7 @@ shattered-pixel-dungeon c# mod
 
 
 ## TODO
-+ sound
++ <s>sound</s>
 + version up(0.8.2d -> 1.00)
 + more platform (currently windows desktop)
 + network play - speedrun
