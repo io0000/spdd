@@ -64,8 +64,12 @@ namespace watabou.noosa.audio
 
                 using (FileStream fs = new FileStream(asset, FileMode.Open))
                 {
-                    var sound = SoundEffect.FromStream(fs);
-                    ids.Add(asset, sound);
+                    try
+                    {
+                        var sound = SoundEffect.FromStream(fs);
+                        ids.Add(asset, sound);
+                    }
+                    catch { }
                 }
             }
         }
