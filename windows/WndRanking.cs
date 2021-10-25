@@ -1,13 +1,13 @@
 using System;
-using watabou.utils;
 using watabou.noosa;
 using watabou.noosa.audio;
 using watabou.noosa.ui;
+using watabou.utils;
 using spdd.items;
+using spdd.messages;
 using spdd.scenes;
 using spdd.sprites;
 using spdd.ui;
-using spdd.messages;
 
 namespace spdd.windows
 {
@@ -42,22 +42,23 @@ namespace spdd.windows
             //    }
             //};
 
-            try
-            {
-                BadgesExtensions.LoadGlobal();
-                Rankings.Instance.LoadGameData(rec);
-            }
-            catch (Exception )
-            {
-                error = Messages.Get(typeof(WndRanking), "error");
-            }
-
             busy = Icons.BUSY.Get();
             busy.origin.Set(busy.width / 2, busy.height / 2);
             busy.angularSpeed = 720;
             busy.x = (WIDTH - busy.width) / 2;
             busy.y = (HEIGHT - busy.height) / 2;
             Add(busy);
+
+            //thread.start();
+            try
+            {
+                BadgesExtensions.LoadGlobal();
+                Rankings.Instance.LoadGameData(rec);
+            }
+            catch (Exception)
+            {
+                error = Messages.Get(typeof(WndRanking), "error");
+            }
         }
 
 
@@ -80,23 +81,26 @@ namespace spdd.windows
             //    }
             //}            
 
-            if (error == null)
+            if (busy != null)
             {
-                Remove(busy);
-                busy = null;
-                if (Dungeon.hero != null)
+                if (error == null)
                 {
-                    CreateControls();
+                    Remove(busy);
+                    busy = null;
+                    if (Dungeon.hero != null)
+                    {
+                        CreateControls();
+                    }
+                    else
+                    {
+                        Hide();
+                    }
                 }
                 else
                 {
                     Hide();
+                    Game.Scene().Add(new WndError(error));
                 }
-            }
-            else
-            {
-                Hide();
-                Game.Scene().Add(new WndError(error));
             }
         }
 
@@ -120,7 +124,7 @@ namespace spdd.windows
                 new BadgesTab(this)
             };
 
-            for (var i = 0; i < pages.Length; ++i)
+            for (int i = 0; i < pages.Length; ++i)
             {
                 Add(pages[i]);
 
