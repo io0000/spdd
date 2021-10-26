@@ -72,12 +72,12 @@ namespace spdd.scenes
                     ++pos;
                 }
 
-                if (Rankings.Instance.wonNumber >= Rankings.TABLE_SIZE)
+                if (Rankings.Instance.totalNumber >= Rankings.TABLE_SIZE)
                 {
                     RenderedTextBlock label = PixelScene.RenderTextBlock(8);
                     label.Hardlight(new Color(0xCC, 0xCC, 0xCC, 0xFF));
                     label.SetHightlighting(true, Window.SHPX_COLOR);
-                    label.Text(Messages.Get(this, "total") + " _" + Rankings.Instance.wonNumber + "_/" + Rankings.Instance.wonNumber);
+                    label.Text(Messages.Get(this, "total") + " _" + Rankings.Instance.wonNumber + "_/" + Rankings.Instance.totalNumber);
                     Add(label);
 
                     label.SetPos(
